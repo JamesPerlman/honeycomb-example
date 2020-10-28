@@ -4,13 +4,13 @@ import React from 'react';
 
 export const SubmitButton = ({ style, ...props }) => (
   <TouchableOpacity style={[styles.button, style]} {...props}>
-    <Text>Submit</Text>
+    <Text style={styles.title}>Submit</Text>
   </TouchableOpacity>
 );
 
 const styles = StyleSheet.create({
   button: {
-    color: '#FB5555',
+    backgroundColor: '#FB5555',
     borderRadius: 30,
     height: 48,
     alignSelf: 'stretch',
@@ -21,5 +21,10 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  title: {
+    color: 'white',
+    fontSize: 24,
+    fontWeight: '600',
   }
-})
+});

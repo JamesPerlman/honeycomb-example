@@ -1,7 +1,7 @@
 import { FlatList, StyleSheet } from 'react-native';
 import React, { Component } from 'react';
 
-import { ItemView } from './item-view';
+import { OptionView } from './option-view';
 
 export class SelectionView extends Component {
 
@@ -15,12 +15,12 @@ export class SelectionView extends Component {
         style={[styles.flatList, style]}
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        keyExtractor={(item, index) => `item_${index}`}
+        keyExtractor={(option, index) => `option_${index}`}
         renderItem={({ item, index }) => (
-          <ItemView
-            item={item}
+          <OptionView
+            option={item}
             onPress={onSelect && (() => onSelect(index))}
-            style={styles.item}
+            style={styles.option}
             selected={index === selectedIndex}
           />
         )}
@@ -32,12 +32,13 @@ export class SelectionView extends Component {
 const styles = StyleSheet.create({
   flatList: {
     width: '100%',
-    height: 60,
+    height: 88,
   },
-  item: {
+  option: {
     marginTop: 8,
-    height: 44,
+    height: 88,
     width: 100,
-    marginRight: 10,
+    marginRight: 4,
+    marginLeft: 4,
   }
 });

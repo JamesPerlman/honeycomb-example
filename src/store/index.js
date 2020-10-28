@@ -1,4 +1,11 @@
-import { createStore } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+
+import { createThunkMiddleware } from './middleware';
 import { rootReducer } from './reducers/index';
 
-export const store = createStore(rootReducer);
+const middleware = applyMiddleware(createThunkMiddleware());
+
+export const store = createStore(rootReducer, middleware);
+
+export * from './selectors';
+export * from './actions';

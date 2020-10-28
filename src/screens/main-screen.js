@@ -1,74 +1,46 @@
-import { Alert, SafeAreaView, StyleSheet, Text, View } from 'react-native';
-import { Container, SelectionView, SubmitButton } from '../components';
-import { Field, reduxForm } from 'redux-form';
+import { AddItemButton, ItemList } from '../components';
 import React, { Component } from 'react';
+import { SafeAreaView, StyleSheet } from 'react-native';
+import { fetchData, itemsSelector } from '../store';
 
 import { connect } from 'react-redux';
-import { data } from '../data';
 
 @connect(
   (state) => ({
-    initialValues: {
-      selection: 4,
-    },
-    items: data.items,
-  })
+    items: itemsSelector(state),
+  }),
+  { fetchData }
 )
-@reduxForm({
-  form: 'the-form',
-  onSubmit: ({ selection }) => {
-    Alert.alert("Success!", `The form submitted successfully with ${data.items[selection].title}.`);
-  }
-})
 export class MainScreen extends Component {
-  renderSelectionField = ({ input, meta }) => {
-    const { items } = this.props;
-    return (
-      <SelectionView
-        data={items}
-        initialIndex={meta.initial}
-        selectedIndex={input.value || meta.initial}
-        onSelect={input.onChange}
-      />
-    );
+
+  componentDidMount() {
+    this.props.fetchData();
   }
-
+  
   render() {
-    const { handleSubmit } = this.props;
+    const { items, navigation, } = this.props;
     return (
-      <SafeAreaView>
-        <View style={styles.container}>
-          <View style={styles.content}>
-            <Text style={styles.headerText}>Check this cool form out!</Text>
-            
-            <Field name="selection" style={styles.field} component={this.renderSelectionField} />
-
-            <SubmitButton style={styles.submitButton} onPress={handleSubmit} />
-          </View>
-        </View>
+      <SafeAreaView style={styles.container}>
+        <ItemList style={styles.list} items={items} />
+        <AddItemButton style={styles.addButton} onPress={() => navigation.navigate('form')} />
       </SafeAreaView>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  addButton: {
+    position: 'absolute',
+    alignSelf: 'center',
+    marginBottom: 20,
+    bottom: 0,
+  },
   container: {
+    width: '100%',
     height: '100%',
   },
-
-  content: {
-    marginTop: 'auto',
-    marginBottom: 'auto',
+  list: {
     width: '100%',
-  },
-
-  headerText: {
-    fontSize: 24,
-    textAlign: 'center',
-  },
-
-  submitButton: {
-    marginTop: 'auto',
-    margin: 16,
+    height: '100%',
   },
 });
