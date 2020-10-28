@@ -9,15 +9,15 @@ import { data } from '../data';
 @connect(
   (state) => ({
     initialValues: {
-      selection: 0,
+      selection: 4,
     },
     items: data.items,
   })
 )
 @reduxForm({
   form: 'the-form',
-  onSubmit: ({ selection }, { items }) => {
-    Alert.alert("Success!", `The form submitted successfully with ${items[selection].title}.`);
+  onSubmit: ({ selection }) => {
+    Alert.alert("Success!", `The form submitted successfully with ${data.items[selection].title}.`);
   }
 })
 export class MainScreen extends Component {
@@ -26,6 +26,7 @@ export class MainScreen extends Component {
     return (
       <SelectionView
         data={items}
+        initialIndex={meta.initial}
         selectedIndex={input.value || meta.initial}
         onSelect={input.onChange}
       />

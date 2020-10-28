@@ -6,10 +6,11 @@ import { ItemView } from './item-view';
 export class SelectionView extends Component {
 
   render() {
-    const { data, onSelect, selectedIndex, style, ...props } = this.props;
+    const { data, initialIndex, onSelect, selectedIndex, style, ...props } = this.props;
 
     return (
       <FlatList
+        initialScrollIndex={initialIndex}
         data={data}
         style={[styles.flatList, style]}
         horizontal={true}

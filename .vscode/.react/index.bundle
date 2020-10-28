@@ -1450,8 +1450,9 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
   var MainScreen = (_dec = (0, _reactRedux.connect)(function (state) {
     return {
       initialValues: {
-        selection: 0
-      }
+        selection: 4
+      },
+      items: _data.data.items
     };
   }), _dec2 = (0, _reduxForm.reduxForm)({
     form: 'the-form',
@@ -1479,14 +1480,16 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
       _this.renderSelectionField = function (_ref2) {
         var input = _ref2.input,
             meta = _ref2.meta;
+        var items = _this.props.items;
         return _react.default.createElement(_components.SelectionView, {
-          data: _data.data.items,
+          data: items,
+          initialIndex: meta.initial,
           selectedIndex: input.value || meta.initial,
           onSelect: input.onChange,
           __self: (0, _assertThisInitialized2.default)(_this),
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 25,
+            lineNumber: 27,
             columnNumber: 7
           }
         });
@@ -1503,7 +1506,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 36,
+            lineNumber: 39,
             columnNumber: 7
           }
         }, _react.default.createElement(_reactNative.View, {
@@ -1511,25 +1514,34 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 37,
+            lineNumber: 40,
             columnNumber: 9
+          }
+        }, _react.default.createElement(_reactNative.View, {
+          style: styles.content,
+          __self: this,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 41,
+            columnNumber: 11
           }
         }, _react.default.createElement(_reactNative.Text, {
           style: styles.headerText,
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 38,
-            columnNumber: 11
+            lineNumber: 42,
+            columnNumber: 13
           }
         }, "Check this cool form out!"), _react.default.createElement(_reduxForm.Field, {
           name: "selection",
+          style: styles.field,
           component: this.renderSelectionField,
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 40,
-            columnNumber: 11
+            lineNumber: 44,
+            columnNumber: 13
           }
         }), _react.default.createElement(_components.SubmitButton, {
           style: styles.submitButton,
@@ -1537,10 +1549,10 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
           __self: this,
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 42,
-            columnNumber: 11
+            lineNumber: 46,
+            columnNumber: 13
           }
-        })));
+        }))));
       }
     }]);
     return MainScreen;
@@ -1549,13 +1561,19 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
 
   var styles = _reactNative.StyleSheet.create({
     container: {
-      justifyContent: 'space-between',
       height: '100%'
     },
+    content: {
+      marginTop: 'auto',
+      marginBottom: 'auto',
+      width: '100%'
+    },
     headerText: {
-      fontSize: 24
+      fontSize: 24,
+      textAlign: 'center'
     },
     submitButton: {
+      marginTop: 'auto',
       margin: 16
     }
   });
@@ -98958,11 +98976,13 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
 
         var _this$props = this.props,
             data = _this$props.data,
+            initialIndex = _this$props.initialIndex,
             onSelect = _this$props.onSelect,
             selectedIndex = _this$props.selectedIndex,
             style = _this$props.style,
-            props = (0, _objectWithoutProperties2.default)(_this$props, ["data", "onSelect", "selectedIndex", "style"]);
+            props = (0, _objectWithoutProperties2.default)(_this$props, ["data", "initialIndex", "onSelect", "selectedIndex", "style"]);
         return _react.default.createElement(_reactNative.FlatList, {
+          initialScrollIndex: initialIndex,
           data: data,
           style: [styles.flatList, style],
           horizontal: true,
@@ -98983,7 +99003,7 @@ __d(function (global, _$$_REQUIRE, _$$_IMPORT_DEFAULT, _$$_IMPORT_ALL, module, e
               __self: _this,
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 19,
+                lineNumber: 20,
                 columnNumber: 11
               }
             });
