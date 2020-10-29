@@ -11,11 +11,9 @@ export class ItemList extends Component {
         style={style}
         keyExtractor={(item, index) => `item_${index}`}
         renderItem={({ item }, index) => (
-          <View
-            style={styles.item}
-          >
+          <View style={styles.item}>
             <Text style={styles.text}>
-              {item.title}
+              {(item || {}).title}
             </Text>
           </View>
         )}
