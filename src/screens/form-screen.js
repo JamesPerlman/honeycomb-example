@@ -22,7 +22,13 @@ import { connect } from 'react-redux';
   }
 })
 export class FormScreen extends Component {
-  renderSelectionField = (options) => ({ input, meta }) => {
+  constructor(props) {
+    super(props);
+    this.renderSelectionField.bind(this);
+  }
+
+  renderSelectionField = ({ input, meta }) => {
+    const { options } = this.props;
     return (
       <SelectionView
         style={styles.selectionView}
@@ -35,14 +41,14 @@ export class FormScreen extends Component {
   }
 
   render() {
-    const { handleSubmit, options } = this.props;
+    const { handleSubmit } = this.props;
     return (
       <SafeAreaView>
         <View style={styles.container}>
           <View style={styles.content}>
             <Text style={styles.headerText}>Check this cool form out!</Text>
             
-            <Field name="selection" component={this.renderSelectionField(options)} />
+            <Field name="selection" component={this.renderSelectionField} />
 
             <SubmitButton style={styles.submitButton} onPress={handleSubmit} />
           </View>
